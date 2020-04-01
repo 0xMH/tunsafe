@@ -51,9 +51,9 @@ tunsafe_install(){
     port=$(rand 10000 60000)
     eth=$(ls /sys/class/net | awk '/^e/{print}')
     obfsstr=$(cat /dev/urandom | head -1 | md5sum | head -c 4)
-    green "输入 1 开启默认UDP+混淆模式（推荐使用）"
-    green "输入 2 开启默认TCP+混淆模式"
-    green "输入 3 开启默认TCP+混淆+HTTPS伪装模式"
+    green "Enter 1 to enable the default UDP + obfuscation mode (recommended)"
+    green "Enter 2 to enable the default TCP + obfuscation mode"
+    green "Enter 3 to enable the default TCP + obfuscation + HTTPS masquerading mode"
     read choose
 if [ $choose == 1 ]
 then
@@ -216,27 +216,27 @@ EOF
 #开始菜单
 start_menu(){
     clear
-    green " ===================================="
-    green " 介绍：一键安装TunSafe                "
-    green " 系统：Ubuntu >= 16.04               "
-    green " 作者：atrandys                      "
-    green " 网站：www.atrandys.com              "
-    green " Youtube：atrandys                   "
-    green " ===================================="
+    green " ================================================"
+    green " Introduction: One-click installation of TunSafe "
+    green " System: Ubuntu> = 16.04                         "
+    green " Author: atrandys                                "
+    green " WebSite：www.atrandys.com                       "
+    green " Youtube：atrandys                               "
+    green " ================================================"
     echo
-    green " 1. 安装TunSafe"
-    green " 2. 查看客户端二维码"
-    green " 3. 增加用户"
-    yellow " 0. 退出脚本"
+    green " 1. Install TunSafe"
+    green " 2. View the client QR code"
+    green " 3.  Add users "
+    yellow " 0. Exit script"
     echo
-    read -p "请输入数字:" num
+    read -p "Please Enter key in numbers:" num
     case "$num" in
     1)
     tunsafe_install
     ;;
     2)
     content=$(cat /etc/tunsafe/client.conf)
-    green "这里只显示默认增加的第一个client的二维码"
+    green "Only the QR code of the first client added by default is displayed here."
     echo "${content}" | qrencode -o - -t UTF8
     ;;
     3)
@@ -247,7 +247,7 @@ start_menu(){
     ;;
     *)
     clear
-    red "请输入正确数字"
+    red "Please enter the correct number"
     sleep 2s
     start_menu
     ;;
